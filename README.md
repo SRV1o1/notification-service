@@ -31,3 +31,8 @@ Features
     Secure API with JWT and role-based access control.
 
     Dockerized for easy deployment.
+
+Future Improvements
+
+    Add role-based access control to restrict sensitive APIs (e.g., limit access to notification history or admin operations).
+    Extend to support real message delivery via third-party providers.
