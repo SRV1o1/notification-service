@@ -11,16 +11,18 @@ import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Component
 @AllArgsConstructor
+@Service
 public class NotificationListener {
 
     private final NotificationRepository notificationRepository;
     private final ObjectMapper objectMapper;
-    private final NotificationSenderFactory notificationChannelSender;
+    private final NotificationSenderFactory notificationSenderFactory;
 
     @RabbitListener(queues = "notification.queue")
     public void listen(String messageJson) {
@@ -30,7 +32,7 @@ public class NotificationListener {
             if (optional.isPresent()) {
                 Notification notification = optional.get();
                 notification.setStatus(NotificationStatus.PENDING);
-                notificationRepository.save(notification);
+                notification = notificationRepository.save(notification);
                 processNotification(notification, dto);
             } else {
                 handleNotificationNotFound(dto.getId());
@@ -56,14 +58,13 @@ public class NotificationListener {
         } else {
             notification.setStatus(NotificationStatus.STOPPED);
             notificationRepository.save(notification);
-            System.out.println("Retry limit reached for Notification ID: " + notification.getId());
         }
     }
 
 
     private boolean trySendingNotification(NotificationMessageDTO dto) {
         try {
-            NotificationChannelSender channelSender = notificationChannelSender.getSender(dto.getType());
+            NotificationChannelSender channelSender = notificationSenderFactory.getSender(dto.getType());
             channelSender.sendChannelNotification(dto);
             return true;
         } catch (Exception e) {

@@ -9,5 +9,6 @@ public class EmailSender implements NotificationChannelSender {
     @Override
     public void sendChannelNotification(NotificationMessageDTO dto) {
         System.out.println("📧 Sending Email to " + dto.getRecipient() + ": " + dto.getMessage());
+        throw new RuntimeException();
     }
 }

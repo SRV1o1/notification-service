@@ -24,7 +24,7 @@ public class Notification {
     private NotificationType type; // EMAIL, SMS, PUSH
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private NotificationStatus status; // PENDING, SENT, FAILED
 
     @Column(nullable = false)
