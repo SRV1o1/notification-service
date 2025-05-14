@@ -54,7 +54,7 @@ public class NotificationListener {
                 System.out.println("Retry attempt " + notification.getRetryCount() + " failed");
             }
         } else {
-            notification.setStatus(NotificationStatus.FAILED);
+            notification.setStatus(NotificationStatus.STOPPED);
             notificationRepository.save(notification);
             System.out.println("Retry limit reached for Notification ID: " + notification.getId());
         }
