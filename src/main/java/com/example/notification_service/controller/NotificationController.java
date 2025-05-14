@@ -23,5 +23,4 @@ public class NotificationController {
         return ResponseEntity.status(201).body("Notification created with ID: " + savedNotification.getId());
     }
 
-
 }

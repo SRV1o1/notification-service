@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class NotificationService {
     NotificationRepository repository;
+    NotificationSender sender;
 
     public Notification createNotification(NotificationRequestDTO request) {
         Notification notification = new Notification();
@@ -21,6 +22,8 @@ public class NotificationService {
         notification.setType(request.getType());
         notification.setStatus(NotificationStatus.PENDING);
         notification.setCreatedAt(LocalDateTime.now());
+
+        sender.sendMessage(request.getMessage());
 
         return repository.save(notification);
     }
