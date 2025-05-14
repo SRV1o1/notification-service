@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
-public class NoticationService {
+public class NotificationService {
     NotificationRepository repository;
 
     public Notification createNotification(NotificationRequestDTO request) {

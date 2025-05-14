@@ -2,7 +2,7 @@ package com.example.notification_service.controller;
 
 import com.example.notification_service.dtos.NotificationRequestDTO;
 import com.example.notification_service.models.Notification;
-import com.example.notification_service.service.NoticationService;
+import com.example.notification_service.service.NotificationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/notifications")
 public class NotificationController {
 
-    private final NoticationService notificationService;
+    private final NotificationService notificationService;
 
     @PostMapping("/post")
     public ResponseEntity<String> sendNotification(@RequestBody NotificationRequestDTO request) {
