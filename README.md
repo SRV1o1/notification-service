@@ -16,7 +16,7 @@ Technologies
 
     Docker – for easy deployment across different environments.
 
-    JWT – for secure API access with role-based authentication.
+    JWT – for secure API access.
 
 Features
 
@@ -28,7 +28,7 @@ Features
 
     Automatic status tracking (PENDING, SENT, FAILED) and retry on failure.
 
-    Secure API with JWT and role-based access control.
+    Secure API with JWT authentication.
 
     Dockerized for easy deployment.
 
